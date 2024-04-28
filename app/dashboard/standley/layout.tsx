@@ -12,8 +12,6 @@ export default function Layout({ children }: { children: ReactNode }) {
 		}
 	];
 
-	const 
-
   return (
     <div className="flex h-screen">
       <nav className="w-72 p-8 flex flex-col gap-8 border-r">

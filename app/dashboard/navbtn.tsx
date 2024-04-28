@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 export const NavButtons = ({
@@ -9,14 +10,14 @@ export const NavButtons = ({
   pages: Page[];
   root: string;
 }) => {
-  const url = window.location.pathname;
+	const pathname = usePathname()
   const [slug, setSlug] = useState(pages[0].slug);
 
   return (
     <>
       {pages.map((page) => (
-        <a href="" key={page.slug}>
-          <page.icon />
+        <a href={root + page.slug} key={page.slug}>
+          {page.icon}
         </a>
       ))}
     </>
