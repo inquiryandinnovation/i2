@@ -8,7 +8,7 @@ export const Icon = ({className}: {className?: string}) => (
     xmlns="http://www.w3.org/2000/svg"
 		className={className}
   >
-    <g clip-path="url(#clip0_1716_10)">
+    <g clipPath="url(#clip0_1716_10)">
       <mask
         id="mask0_1716_10"
         maskUnits="userSpaceOnUse"
