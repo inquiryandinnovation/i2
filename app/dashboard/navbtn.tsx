@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const NavButtons = ({
   pages,
@@ -12,12 +12,11 @@ export const NavButtons = ({
   root: string;
 }) => {
   const pathname = usePathname();
-  const [slug, setSlug] = useState(pathname.replace(root, ""));
 
   return (
     <ul className="flex flex-col gap-2">
       {pages.map((page) => {
-        const selected = slug === page.slug;
+        const selected = pathname.replace(root, "") === page.slug;
         return (
           <li key={page.slug}>
             <Link
