@@ -8,7 +8,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
 	const { data: students } = await supabase.from("profiles").select("slug");
 	const { data: projects } = await supabase.from("projects").select("slug");
-	const { data: blogs } = await supabase.from("blogs").select("id")
+	const { data: blogs } = await supabase.from("blogs").select("id");
 
 	const studenturls = students?.map((student: { slug: string }) => {
 		return {

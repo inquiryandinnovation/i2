@@ -7,7 +7,7 @@ export default function Student({
 }) {
 	return (
 		<>
-			<div className="w-full h-64 flex items-end relative justify-center">
+			<div className="relative flex h-64 w-full items-end justify-center">
 				<Image
 					src="https://images.unsplash.com/photo-1490598000245-075175152d25?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" // replace with your image path
 					alt="Background"
@@ -16,25 +16,25 @@ export default function Student({
 					draggable={false}
 					className="z-0 select-none"
 				/>
-				<div className="max-w-screen-xl w-full h-24 flex items-center relative">
+				<div className="relative flex h-24 w-full max-w-screen-xl items-center">
 					<Image
 						src={
 							"https://i2.today/wp-content/uploads/2021/08/09C3261F-D6E4-4798-AA95-D61F0968C3A6-2-scaled-e1631213842647.jpeg"
 						}
 						alt="background"
-						className="h-44 w-44 select-none rounded-full bottom-0 left-0"
+						className="bottom-0 left-0 h-44 w-44 select-none rounded-full"
 						draggable={false}
 						height={100}
 						width={100}
 					/>
 				</div>
 			</div>
-			<div className="max-w-screen-xl mx-auto flex">
+			<div className="mx-auto flex max-w-screen-xl">
 				<div className="flex py-12">
 					<div className="flex-1 flex-col ">
-						<h1 className="font-bold text-4xl">Alexis Lo</h1>
+						<h1 className="text-4xl font-bold">Alexis Lo</h1>
 						<h2 className="text-xl">2025</h2>
-						<p className="py-8 pr-8 flex-1">
+						<p className="flex-1 py-8 pr-8">
 							Hi, my name is Alexis Lo, and I am a junior at SHC. Academically,
 							my favorite subjects are math and science. Something about math is
 							the satisfaction of getting a problem right and knowing that you

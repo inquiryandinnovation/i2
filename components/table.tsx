@@ -27,8 +27,8 @@ export default function Table({
 	return (
 		<section className="flex flex-col">
 			{data ? (
-				<table className="mt-4 text-left table-auto border-collapse text-sm">
-					<thead className="border-b border-gray-300 sticky top-0 bg-white/75 backdrop-blur ">
+				<table className="mt-4 table-auto border-collapse text-left text-sm">
+					<thead className="sticky top-0 border-b border-gray-300 bg-white/75 backdrop-blur ">
 						<tr>
 							{cols.map((col) => (
 								<th
@@ -44,9 +44,9 @@ export default function Table({
 					<tbody>
 						{data.map((row) => (
 							// @ts-expect-error
-							<tr className="[&>td]:px-6 [&>td]:py-4 border-b" key={row.id}>
+							<tr className="border-b [&>td]:px-6 [&>td]:py-4" key={row.id}>
 								{cols.map((col) => (
-									<td className="font-medium max-w-36 truncate">
+									<td className="max-w-36 truncate font-medium">
 										{/* @ts-expect-error */}
 										{row[col.col]}
 									</td>

@@ -23,7 +23,7 @@ export const NavButtons = ({
 					<li key={page.slug}>
 						<Link
 							href={root + page.slug}
-							className={`p-2 flex items-center font-medium rounded-md transition group ${
+							className={`group flex items-center rounded-md p-2 font-medium transition ${
 								selected ? "bg-gray-50" : "hover:bg-gray-50"
 							}`}
 						>
@@ -39,7 +39,7 @@ export const NavButtons = ({
 							<p
 								className={`${
 									selected && "text-green-700"
-								} group-hover:text-green-700 mr-4 transition`}
+								} mr-4 transition group-hover:text-green-700`}
 							>
 								{page.name}
 							</p>
