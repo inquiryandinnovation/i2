@@ -16,7 +16,9 @@ export const NavButtons = ({
 	return (
 		<ul className="flex flex-col gap-2">
 			{pages.map((page) => {
-				const selected = pathname.replace(root, "") === page.slug;
+				// do not use contains for this
+				const selected = page.slug.startsWith(pathname.replace(root, ""));
+
 				return (
 					<li key={page.slug}>
 						<Link

@@ -41,6 +41,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 
 	return (
 		<div className="flex h-screen">
+			{/* Left Nav */}
 			<nav className="w-72 p-4 flex flex-col gap-10 border-r">
 				<section className="px-2">
 					<Icon className="size-7" />
@@ -48,6 +49,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 				<section>
 					<NavButtons pages={pages} root="/dashboard/standley" />
 				</section>
+				{/* user profile popup */}
 				<section className="mt-auto">
 					<Link
 						href="/profile/settings"
@@ -61,8 +63,9 @@ export default function Layout({ children }: { children: ReactNode }) {
 					</Link>
 				</section>
 			</nav>
+			{/* Main body */}
 			<div className="flex flex-col grow overflow-y-auto">
-				{/* <section>nav if we want it</section> */}
+				{/* <section>top nav if we want it</section> */}
 				<section>{children}</section>
 			</div>
 		</div>
