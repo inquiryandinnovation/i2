@@ -10,14 +10,13 @@ export default function Table({
 	cols: { name: string; col: string }[];
 	table?: string;
 }) {
-	const [data, setData] = useState<unknown[]>();
+	const [data, setData] = useState<{ [key: string]: string }[]>();
 	const colsData = [...new Set(cols.map((item) => item.col))].join(", ");
 
 	useEffect(() => {
 		(async () => {
 			if (table) {
 				const data = await getData(table, colsData + ", id");
-				console.log(data);
 
 				setData(data || undefined);
 			}
@@ -43,11 +42,9 @@ export default function Table({
 
 					<tbody>
 						{data.map((row) => (
-							// @ts-expect-error
 							<tr className="border-b [&>td]:px-6 [&>td]:py-4" key={row.id}>
 								{cols.map((col) => (
 									<td className="max-w-36 truncate font-medium">
-										{/* @ts-expect-error */}
 										{row[col.col]}
 									</td>
 								))}
