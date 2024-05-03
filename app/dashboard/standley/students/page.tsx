@@ -1,4 +1,4 @@
-import Table from "@/components/table";
+import { Table } from "@/components/table";
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 
 export default function Page() {

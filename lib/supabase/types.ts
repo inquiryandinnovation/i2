@@ -41,7 +41,7 @@ export type Database = {
 			};
 			profiles: {
 				Row: {
-					admin: boolean | null;
+					admin: boolean;
 					avatar_url: string | null;
 					background_image_url: string | null;
 					bio: string | null;
@@ -54,20 +54,20 @@ export type Database = {
 					websites: string[] | null;
 				};
 				Insert: {
-					admin?: boolean | null;
+					admin?: boolean;
 					avatar_url?: string | null;
 					background_image_url?: string | null;
 					bio?: string | null;
 					class?: number | null;
 					full_name?: string | null;
-					id: string;
+					id?: string;
 					slug: string;
 					tags?: string[] | null;
 					updated_at?: string | null;
 					websites?: string[] | null;
 				};
 				Update: {
-					admin?: boolean | null;
+					admin?: boolean;
 					avatar_url?: string | null;
 					background_image_url?: string | null;
 					bio?: string | null;
@@ -79,15 +79,7 @@ export type Database = {
 					updated_at?: string | null;
 					websites?: string[] | null;
 				};
-				Relationships: [
-					{
-						foreignKeyName: "profiles_id_fkey";
-						columns: ["id"];
-						isOneToOne: true;
-						referencedRelation: "users";
-						referencedColumns: ["id"];
-					},
-				];
+				Relationships: [];
 			};
 			profiles_blogs: {
 				Row: {
@@ -154,37 +146,43 @@ export type Database = {
 					content: string | null;
 					created_at: string;
 					id: string;
+					image: string | null;
 					infographic_urls: string[] | null;
 					name: string;
-					photo_urls: string[] | null;
 					prizes: string[] | null;
 					slug: string;
+					summary: string | null;
 					tags: string[] | null;
 					videos: Json[] | null;
+					year: number;
 				};
 				Insert: {
 					content?: string | null;
 					created_at?: string;
 					id?: string;
+					image?: string | null;
 					infographic_urls?: string[] | null;
 					name: string;
-					photo_urls?: string[] | null;
 					prizes?: string[] | null;
 					slug: string;
+					summary?: string | null;
 					tags?: string[] | null;
 					videos?: Json[] | null;
+					year?: number;
 				};
 				Update: {
 					content?: string | null;
 					created_at?: string;
 					id?: string;
+					image?: string | null;
 					infographic_urls?: string[] | null;
 					name?: string;
-					photo_urls?: string[] | null;
 					prizes?: string[] | null;
 					slug?: string;
+					summary?: string | null;
 					tags?: string[] | null;
 					videos?: Json[] | null;
+					year?: number;
 				};
 				Relationships: [];
 			};

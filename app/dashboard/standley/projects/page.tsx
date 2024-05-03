@@ -1,11 +1,11 @@
-import Table from "@/components/table";
+import { Table, TableCol } from "@/components/table";
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 
 export default function Page() {
-	const cols = [
+	const cols: TableCol[] = [
 		{ name: "Name", col: "name" },
-		{ name: "Content", col: "content" },
-		{ name: "Name", col: "name" },
+		{ name: "Summary", col: "summary" },
+		{ name: "Team", profiles: true },
 		{ name: "Name", col: "name" },
 		{ name: "", col: "name" },
 	];

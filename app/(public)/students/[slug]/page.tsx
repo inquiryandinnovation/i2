@@ -1,27 +1,34 @@
+import { getProfile } from "@/lib/students";
 import Image from "next/image";
+import { notFound } from "next/navigation";
+import backgroundImage from "@/public/placeholders/backdrop.jpg";
+import Link from "next/link";
 
-export default function Student({
+export default async function Student({
 	params: { slug },
 }: {
 	params: { slug: string };
 }) {
+	const student = await getProfile(slug);
+	if (!student) {
+		return notFound();
+	}
 	return (
 		<>
 			<div className="relative flex h-64 w-full items-end justify-center">
 				<Image
-					src="https://images.unsplash.com/photo-1490598000245-075175152d25?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" // replace with your image path
-					alt="Background"
-					layout="fill"
+					src={student.background_image_url || backgroundImage}
+					alt="Background Image"
 					objectFit="cover"
 					draggable={false}
 					className="z-0 select-none"
+					quality={95}
+					fill
 				/>
 				<div className="relative flex h-24 w-full max-w-screen-xl items-center">
 					<Image
-						src={
-							"https://i2.today/wp-content/uploads/2021/08/09C3261F-D6E4-4798-AA95-D61F0968C3A6-2-scaled-e1631213842647.jpeg"
-						}
-						alt="background"
+						src={student.avatar_url || backgroundImage}
+						alt={`A photo of ${student.full_name}`}
 						className="bottom-0 left-0 h-44 w-44 select-none rounded-full"
 						draggable={false}
 						height={100}
@@ -29,49 +36,62 @@ export default function Student({
 					/>
 				</div>
 			</div>
-			<div className="mx-auto flex max-w-screen-xl">
-				<div className="flex py-12">
+			<div className="mx-auto flex w-full max-w-screen-xl">
+				<div className="flex grow py-12">
 					<div className="flex-1 flex-col ">
-						<h1 className="text-4xl font-bold">Alexis Lo</h1>
-						<h2 className="text-xl">2025</h2>
-						<p className="flex-1 py-8 pr-8">
-							Hi, my name is Alexis Lo, and I am a junior at SHC. Academically,
-							my favorite subjects are math and science. Something about math is
-							the satisfaction of getting a problem right and knowing that you
-							achieved something through that long process. Solving math
-							problems is something that I enjoy the challenge of, so math has
-							been one of my favorite subjects since elementary school. On the
-							other hand, I enjoy science because I like being able to
-							understand the world around me. This year, I am building from my
-							classes last year to take 4 APs (AP Computer Science A, AP
-							Mandarin, AP Language and Composition, and AP Calculus AB), 1
-							Honors (Biology 1,2H), along with Ethics and U.S. History 1,2. I’m
-							also a part of a bunch of clubs here at SHC, including Tech Crew
-							(lighting) and being a leader in the Photography Club. Outside of
-							school, I currently take ballet classes about four times a week.
-							Over the past year, it has become an 8-10 hours-a-week commitment.
-							Dancing has taught me several skills and life lessons that
-							everyone should learn in their life, such as discipline and
-							diligence. Being in i2 has given me so many valuable learning
-							experiences. Through the passion projects the program has allowed
-							me to pursue, I have learned so much about programming in
-							different languages and gained better time management and
-							persistence. I also look forward to the skills I can gain this
-							upcoming year!
-						</p>
-
+						<h1 className="text-4xl font-bold">{student.full_name}</h1>
+						<h2 className="text-xl">{student.class}</h2>
+						<p className="flex-1 py-8 pr-8">{student.bio}</p>
 						<div className="flex">
 							<div className="flex-1">
 								<h2 className="text-2xl font-semibold text-emerald-900">
 									Blogs
 								</h2>
+								<div className="grid grid-cols-2">
+									{student.blogs
+										.sort(
+											(a, b) =>
+												new Date(b.created_at).getTime() -
+												new Date(a.created_at).getTime()
+										)
+										.map((blog) => (
+											<div>
+												{blog.name}
+												{new Date(blog.created_at).toLocaleDateString()}
+											</div>
+										))}
+								</div>
 							</div>
 						</div>
 					</div>
-					<div className="w-1/3">
+					<div className="flex w-1/3 flex-col">
 						<h2 className="text-2xl font-semibold text-emerald-900">
 							Projects
 						</h2>
+						<div className="my-4 space-y-5">
+							{student.projects
+								.sort((a, b) => b.year - a.year)
+								.map((project) => (
+									<div
+										className="h-64 overflow-hidden rounded-lg border border-gray-300 shadow-md"
+										key={slug}
+									>
+										<Link href={`/projects/${project.slug}`}>
+											<Image
+												src={project.image || backgroundImage}
+												alt={`Image of`}
+												width={300}
+												height={100}
+												className="h-32 w-full object-cover"
+											/>
+											<h2 className="mt-2 line-clamp-1 px-5 text-lg font-medium">
+												{project.name}
+											</h2>
+											<p className="line-clamp-3 p-5 pt-0">{project.summary}</p>
+										</Link>
+									</div>
+								))}
+						</div>
 					</div>
 				</div>
 			</div>

@@ -17,7 +17,7 @@ export const NavButtons = ({
 		<ul className="flex flex-col gap-2">
 			{pages.map((page) => {
 				// this won't work with a querystring
-				const selected = page.slug === pathname.replace(root, "")
+				const selected = page.slug === pathname.replace(root, "");
 
 				return (
 					<li key={page.slug}>
