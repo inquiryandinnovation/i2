@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 // - ability to search
 // - tags that look better with a number counter
 // - pagination
+// - foreign table fetching
 
 export function Table({ cols, table }: { cols: TableCol[]; table?: string }) {
 	const [data, setData] = useState<GetDataReturn[]>();
@@ -26,7 +27,7 @@ export function Table({ cols, table }: { cols: TableCol[]; table?: string }) {
 						", id" +
 						(hasProfiles ? ", profiles (full_name, avatar_url, slug)" : "")
 				);
-				console.log(data);
+
 				setData(data || undefined);
 			}
 		})();
@@ -92,6 +93,57 @@ export function Table({ cols, table }: { cols: TableCol[]; table?: string }) {
 		return path.join("");
 	};
 
+	const Loading = () => {
+		const rows = 5;
+		const loadingArray = Array.from({ length: rows }, () =>
+			Array.from(
+				{ length: cols.length },
+				() => Math.floor(Math.random() * 6) + 4
+			)
+		);
+
+		return (
+			<table className="mt-4 table-auto border-collapse text-left text-sm">
+				<thead className="sticky top-0 border-b border-gray-300 bg-white/75 backdrop-blur ">
+					<tr>
+						{cols.map((col) => (
+							<th
+								key={col.col}
+								className={`px-6 py-4 font-medium text-gray-800`}
+							>
+								<p className="w-min animate-pulse rounded bg-gray-100 text-transparent">
+									{col.name}
+								</p>
+							</th>
+						))}
+					</tr>
+				</thead>
+				{/* this doesn't properly parse foreign tables yet */}
+				<tbody>
+					{loadingArray.map((item, i) => {
+						return (
+							<tr
+								className="h-14 overflow-visible border-b [&>td]:px-6 [&>td]:py-4"
+								key={i}
+							>
+								{item.map((i) => (
+									<td className={`overflow-visible" max-w-36 truncate`}>
+										<div
+											className=" animate-pulse rounded bg-gray-100 text-transparent"
+											style={{ width: `${i}rem` }}
+										>
+											t
+										</div>
+									</td>
+								))}
+							</tr>
+						);
+					})}
+				</tbody>
+			</table>
+		);
+	};
+
 	return (
 		<section className="flex flex-col">
 			{data ? (
@@ -113,7 +165,7 @@ export function Table({ cols, table }: { cols: TableCol[]; table?: string }) {
 						{data.map((row) => {
 							return (
 								<tr
-									className="overflow-visible border-b [&>td]:px-6 [&>td]:py-4"
+									className="h-14 overflow-visible border-b [&>td]:px-6 [&>td]:py-4"
 									key={row.id}
 								>
 									{cols.map((col) => (
@@ -135,7 +187,7 @@ export function Table({ cols, table }: { cols: TableCol[]; table?: string }) {
 					</tbody>
 				</table>
 			) : (
-				<p>loading</p>
+				<Loading />
 			)}
 		</section>
 	);
