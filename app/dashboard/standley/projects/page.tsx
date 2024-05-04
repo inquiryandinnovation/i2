@@ -1,14 +1,27 @@
 import { Table, TableCol } from "@/components/table";
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 
+const cols: TableCol[] = [
+	{
+		name: "Name",
+		col: "name",
+		className: "font-medium",
+		link: "/projects/[slug]",
+	},
+	{ name: "Summary", col: "summary" },
+	{ name: "Team", profiles: true },
+	{ name: "Infographics", col: "infographic_urls", count: true },
+	{ name: "Tags", col: "tags" },
+	{
+		name: "",
+		col: "slug",
+		displayText: "Edit",
+		link: "/dashboard/students/projects/[slug]",
+		className: "font-medium text-green-700",
+	},
+];
+
 export default function Page() {
-	const cols: TableCol[] = [
-		{ name: "Name", col: "name" },
-		{ name: "Summary", col: "summary" },
-		{ name: "Team", profiles: true },
-		{ name: "Name", col: "name" },
-		{ name: "", col: "name" },
-	];
 
 	return (
 		<>
