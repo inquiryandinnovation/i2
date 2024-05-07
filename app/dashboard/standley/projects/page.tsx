@@ -14,8 +14,8 @@ const cols: TableCol[] = [
 	{ name: "Team", profiles: true },
 	{ name: "Infographics", col: "infographic_urls", count: true },
 	{ name: "Tags", col: "tags", count: true },
-	{
-		name: "Complete",
+	// {
+	// 	name: "Complete",
 		// will allow him to filter by these cols in these categories, but by default will show a checkmark if the values he sets are fulfilled.
 		// this will also check and add any cols to the origional fetch call if a col is not being fetched
 		// it will also use a name specified in the above names if you use a col referanced already. if not, you can add a custom name or it'll just 
@@ -65,7 +65,7 @@ const cols: TableCol[] = [
 		// 	],
 		// 	default: [{}],
 		// },
-	},
+	// },
 	{
 		name: "",
 		col: "slug",
