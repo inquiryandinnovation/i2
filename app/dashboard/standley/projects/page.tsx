@@ -22,7 +22,6 @@ const cols: TableCol[] = [
 ];
 
 export default function Page() {
-
 	return (
 		<>
 			{/* Header */}

@@ -41,7 +41,7 @@ export function Table({ cols, table }: { cols: TableCol[]; table?: string }) {
 				.map((profile, i) => (
 					<Link
 						className="group/profile relative flex flex-col items-center"
-						key={profile.name}
+						key={profile.full_name + row.id}
 						style={{
 							zIndex: 100 - i,
 						}}
@@ -49,7 +49,7 @@ export function Table({ cols, table }: { cols: TableCol[]; table?: string }) {
 					>
 						<Image
 							src={profile.avatar_url}
-							alt={`${profile.name}'s Avatar`}
+							alt={`${profile.full_name}'s Avatar`}
 							className={`size-6 rounded-full object-cover shadow transition group-hover/profiles:!translate-y-0`}
 							width={75}
 							height={75}
@@ -97,8 +97,7 @@ export function Table({ cols, table }: { cols: TableCol[]; table?: string }) {
 		const rows = 5;
 		const loadingArray = Array.from({ length: rows }, () =>
 			Array.from(
-				{ length: cols.length },
-				() => Math.floor(Math.random() * 6) + 4
+				{ length: cols.length }
 			)
 		);
 
@@ -108,7 +107,7 @@ export function Table({ cols, table }: { cols: TableCol[]; table?: string }) {
 					<tr>
 						{cols.map((col) => (
 							<th
-								key={col.col}
+								key={col.name+"loading"}
 								className={`px-6 py-4 font-medium text-gray-800`}
 							>
 								<p className="w-min animate-pulse rounded bg-gray-100 text-transparent">
@@ -124,13 +123,12 @@ export function Table({ cols, table }: { cols: TableCol[]; table?: string }) {
 						return (
 							<tr
 								className="h-14 overflow-visible border-b [&>td]:px-6 [&>td]:py-4"
-								key={i}
+								key={i+"loading"}
 							>
-								{item.map((i) => (
-									<td className={`overflow-visible" max-w-36 truncate`}>
+								{item.map((_, i2) => (
+									<td className={`overflow-visible" max-w-36 truncate`} key={i+i2}>
 										<div
-											className=" animate-pulse rounded bg-gray-100 text-transparent"
-											style={{ width: `${i}rem` }}
+											className=" animate-pulse rounded bg-gray-100 text-transparent w-28"
 										>
 											t
 										</div>
@@ -152,7 +150,7 @@ export function Table({ cols, table }: { cols: TableCol[]; table?: string }) {
 						<tr>
 							{cols.map((col) => (
 								<th
-									key={col.col}
+									key={col.name}
 									className={`px-6 py-4 font-medium text-gray-800`}
 								>
 									{col.name}
@@ -171,6 +169,7 @@ export function Table({ cols, table }: { cols: TableCol[]; table?: string }) {
 									{cols.map((col) => (
 										<td
 											className={`overflow-visible" max-w-36 truncate ${col.className}`}
+											key={col.col + row.id}
 										>
 											{col.link ? (
 												<Link href={replaceLinkValues(col.link, row) || ""}>
