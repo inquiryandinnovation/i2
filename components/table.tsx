@@ -68,16 +68,16 @@ export function Table({ cols, table }: { cols: TableCol[]; table?: string }) {
 
 	// Represents each individual cell
 	const TableCell = ({ col, row }: { row: GetDataReturn; col: TableCol }) => {
-		return (
-			col.displayText ||
-			(col.profiles ? (
-				<Profiles row={row} />
-			) : col.count && row[col.col!] ? (
-				row[col.col!].length
-			) : (
-				row[col.col!]
-			))
-		);
+		if (col.displayText) {
+			return col.displayText;
+		}
+		if (col.profiles) {
+			return <Profiles row={row} />;
+		}
+		if (col.count && row[col.col!]) {
+			return row[col.col!].length;
+		}
+		return row[col.col!];
 	};
 
 	const replaceLinkValues = (link: string, rowData: GetDataReturn) => {
@@ -96,9 +96,7 @@ export function Table({ cols, table }: { cols: TableCol[]; table?: string }) {
 	const Loading = () => {
 		const rows = 5;
 		const loadingArray = Array.from({ length: rows }, () =>
-			Array.from(
-				{ length: cols.length }
-			)
+			Array.from({ length: cols.length })
 		);
 
 		return (
@@ -107,7 +105,7 @@ export function Table({ cols, table }: { cols: TableCol[]; table?: string }) {
 					<tr>
 						{cols.map((col) => (
 							<th
-								key={col.name+"loading"}
+								key={col.name + "loading"}
 								className={`px-6 py-4 font-medium text-gray-800`}
 							>
 								<p className="w-min animate-pulse rounded bg-gray-100 text-transparent">
@@ -117,19 +115,19 @@ export function Table({ cols, table }: { cols: TableCol[]; table?: string }) {
 						))}
 					</tr>
 				</thead>
-				{/* this doesn't properly parse foreign tables yet */}
 				<tbody>
 					{loadingArray.map((item, i) => {
 						return (
 							<tr
 								className="h-14 overflow-visible border-b [&>td]:px-6 [&>td]:py-4"
-								key={i+"loading"}
+								key={i + "loading"}
 							>
 								{item.map((_, i2) => (
-									<td className={`overflow-visible" max-w-36 truncate`} key={i+i2}>
-										<div
-											className=" animate-pulse rounded bg-gray-100 text-transparent w-28"
-										>
+									<td
+										className={`overflow-visible" max-w-36 truncate`}
+										key={i + i2}
+									>
+										<div className=" w-28 animate-pulse rounded bg-gray-100 text-transparent">
 											t
 										</div>
 									</td>
